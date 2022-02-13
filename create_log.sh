@@ -19,15 +19,16 @@ cpuNotUsed=$(top -n1 | sed  's/,/./g' |sed '3p;d' | awk '{print  $8}')
 #escala de 2 posiciones decimales y por ultimo es procesado por la calculadora basica.
 cpuUsed=$(echo "scale=2; 100.0-$cpuNotUsed" | bc)
 
-
-echo $cpuUsed
-for p in $cpu
-do
- echo $p
-done
+#Se obtiene la inforacion del disco principal estableciendo la '/', luego con el comando sed se
+#optien la segunda fila donde se encuentra la informacion y se imprime con el comand awk
+diskUsed=$(df -h / | sed '2p;d'| awk '{print $3 " de " $2}')
 
 
-echo $datetime
+#Obtener uso consumo de red
+tx=$(ifconfig ens33 | egrep  'TX packets' | awk '{print $5}' | awk '{ foo = $0 /1024^2 ; printf "%.2f MB\n",foo  }')
+rx=$(ifconfig ens33 | egrep  'RX packets' | awk '{print $5}' | awk '{ foo = $0 /1024^2 ; printf "%.2f MB\n",foo  }')
+
+echo "$dateTime - $uptime - Memory $usedMemory - CPU $cpuUsed% - Disk $diskUsed - Network rx $rx tx $tx" >> log$USERNAME.txt
 
 
 
