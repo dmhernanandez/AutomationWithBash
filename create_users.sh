@@ -20,8 +20,6 @@ escala=$(echo "100.0/$cantidad" | bc)
 do
 
    count=0
-   
- 
   sleep 1
   echo 	XXX	#Delimitadores usados por whiptail
   counter_progressbar=$((counter_progressbar+1))
@@ -41,6 +39,6 @@ do
    fi
   echo XXX
 
-done < $TEMP_FILE) | whiptail --gauge "Eliminando" 8 80 0
+done < $TEMP_FILE) | whiptail --gauge "Agregando" 8 80 0
 rm $TEMP_FILE
 
