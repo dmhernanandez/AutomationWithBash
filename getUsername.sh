@@ -5,6 +5,7 @@ IFS="/"
  #Se estable que Internal First Separator ser la / 
  for nom in $FULLNAME
  do
+
    count=$((count+1))
    if [ $count -eq 1 ] #Se valida que sean los nombres ya que seran los primeros
    then

@@ -9,6 +9,6 @@ do
     userdel $USER_NAME
     mv /home/$USER_NAME /home/$USER_NAME.del   
 
-done < users.txt
+done < users_to_delete.txt
 
 tail -5 /etc/shadow
