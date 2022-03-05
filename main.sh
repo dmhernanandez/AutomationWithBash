@@ -1,55 +1,30 @@
 #!/bin/bash 
-ESC=$(printf '\033') 
-RESET="${ESC}[0m" 
-BLACK="${ESC}[30m" 
-RED="${ESC}[31m"
-GREEN="${ESC}[32m" 
-GREENC="${ESC}[1;30m" 
-YELLOW="${ESC}[33m" 
-BLUE="${ESC}[34m" 
-MAGENTA="${ESC}[35m"
-CYAN="${ESC}[36m" 
-WHITE="${ESC}[37m" 
-DEFAULT="${ESC}[39m"
 
-BOLD=$(tput bold)
-
-echo -e "$BOLD$GREEN __________  _________   _____ $GREEN            $YELLOW .___.___ "
-echo -e "$BOLD$GREEN \______   \/   _____/  /  _  \ $GREEN           $YELLOW |   |   |"
-echo -e "$BOLD$GREEN  |     ___/\_____  \  /  /_\  \ $GREEN $BLACK  ______ $BLACK$YELLOW |   |   |"
-echo -e "$BOLD$GREEN  |    |    /        \/    |    \ $GREEN$BLACK /_____/ $BLACK$YELLOW |   |   |"
-echo -e "$BOLD$GREEN  |____|   /_______  /\____|__  /  $GREEN         $YELLOW|___|___|"
-echo -e "$BOLD$GREEN                  \/         \/                   "
-echo -e ""
-echo -e "\e[3m $GREEN         Programaciòn para Sistemas Abiertos II\e[0m"
-echo -e "\e[3m $YELLOW             Catedratico: Luis Valle\e[0m"
-echo -e ""
-echo -e "\e[3m $GREEN		            Integrantes"
-echo -e "\e[3m $YELLOW         Alfredo Nataren Baires        231051103 \e[0m"
-echo -e "\e[3m $YELLOW         Blanca Sarahi Osorto Mendez   201710110129  \e[0m"
-echo -e "\e[3m $YELLOW         Dany Mauricio Hernandez       201810030004  \e[0m"
-echo -e "\e[3m $YELLOW         Wilmer Alexander Martinez     201810010311 \e[0m"
 
 
 function MenuAdmin(){
 opusr=0
-		while [ "$opusr" -ne 3 ];		
+  sentinela=0
+		while [ $sentinela -ne 3 -a $sentinela -ne 1 ]	
 		do 
-		    echo ""
-		    echo -e "[$CYAN 1 $DEFAULT] Agregar Usuario"
-		    echo -e "[$CYAN 2 $DEFAULT] Eliminar Usuario"
-		    echo -e "[$CYAN 3 $DEFAULT] Salir"
-		    read -p "Seleccione una opción de 1 a 3: " opusr
-		    echo ""
-		    case $opusr in 
-			[1]* ) echo "$BLUE Agregar Usuario $DEFAULT";
-				(sudo ./create_users.sh)
-				MenuInicial
-				break;;
-			[2]* ) echo "$BLUE Eliminar Usuario $DEFAULT";
-				(sudo ./delete_users.sh)
-				MenuInicial
-				break;;
+		opcion=$(whiptail --title "Programacion para Sistemas Abiertos II" \
+		       --menu "Elige una opción" 10 80 3 \
+		       "1" "Añadir usuarios" \
+		       "2" "Eliminar usuarios" \
+		       "3" "Volver al menu principal"\
+		       3>&1 1>&2 2>&3)
+                       sentinela=$?
+                  
+		    case $opcion in 
+			1) echo "$BLUE Agregar Usuario $DEFAULT";
+				(sudo ./create_users.sh);;
+				
+			2) echo "$BLUE Eliminar Usuario $DEFAULT";
+				(sudo ./delete_users.sh);;
+			3) 
+                            sentinela=3;;
+			
+				
 		esac 
 	        done
 }
@@ -58,36 +33,37 @@ opusr=0
 
 
 function MenuInicial(){
-while true  
+sentinela=0
+
+while [ $sentinela -ne 4  -a $sentinela -ne 1 ]
 do 
-    echo ""
-    echo -e "[$RED 1 $DEFAULT] Administraciòn de usuarios" 
-    echo -e "[$RED 2 $DEFAULT] Registros del Sistema"
-    echo -e "[$RED 3 $DEFAULT] Instalar Grafana"
-    echo -e "[$RED 4 $DEFAULT] Salir"
-    read -p "Seleccione una opción de 1 a 4: " op 
-    echo ""
-    case $op in 
-        [1]* ) echo "$BLUE Administraciòn de Usuarios $DEFAULT"; 
+ opcion=$(whiptail --title "Programacion para Sistemas Abiertos II" \
+               --menu "Elige una opción" 20 80 4 \
+               "1" "Agrear y eliminar usuarios" \
+               "2" "Registros del sistema" \
+               "3" "Instalacion automatica" \
+               "4" " Salir" \
+               3>&1 1>&2 2>&3)
+        sentinela=$?
+    case $opcion in 
+        1 ) 
 		MenuAdmin
-	      break;; 
-        [2]* ) echo "$BLUE Registros del Sistema $DEFAULT";
-		(./create_log.sh)
-		MenuInicial
-	       break;; 
-        [3]* ) echo "$BLUE Instalacion de Grafana $DEFAULT";
-		(./grafana.sh)
-		MenuInicial
-		break;; 
-	[4]* ) echo "$BLUE Salir $DEFAULT"; 
-		exit;
-	      break;;        
-        * ) echo "Seleccione una Opción de 1 a 4.";; 
+                sentinela=0 #Se restablece el valor del centinela a cero, ya puede ser modificada a 1 en MenuAdmin y no por lo tanto no entraria a este ciclo
+		;;
+         
+        2) 
+	       log=$(./create_log.sh)
+               whiptail --backtitle "Amacenado en log.txt" --title "Registro de sistema" \
+              --msgbox "$log" 15 80;;
+        3)
+   	   (./grafana.sh);;
+         
+         4)
+            sentinela=4;; 
+          
     esac 
 done
 
-
-echo -e "$DEFAULT" 
 }
 
 
