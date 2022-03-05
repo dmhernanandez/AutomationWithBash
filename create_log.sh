@@ -30,6 +30,9 @@ rx=$(ifconfig ens33 | egrep  'RX packets' | awk '{print $5}' | awk '{ foo = $0 /
 
 echo "$dateTime - $uptime - Memory $usedMemory - CPU $cpuUsed% - Disk $diskUsed - Network rx $rx tx $tx" >> log$USERNAME.txt
 
+#Formato solo para mostrar en msgbox
+echo "$uptime $datetime \n Memory $usedMemory \n CPU $cpuUsed% \n Disk $diskUsed \n Network rx $rx tx $tx"
+
 
 
 

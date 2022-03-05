@@ -1,11 +1,10 @@
 #!/bin/bash
 #La variable FULLNAME se crea en el scritp padre create_users.sh
 
-IFS="/"
+IFS="-"
  #Se estable que Internal First Separator ser la / 
  for nom in $FULLNAME
  do
-
    count=$((count+1))
    if [ $count -eq 1 ] #Se valida que sean los nombres ya que seran los primeros
    then
@@ -15,7 +14,12 @@ IFS="/"
   then
     USER_NAME+=$(echo $nom | awk '{print $1}')
     USER_NAME=$(echo $USER_NAME | tr [[:upper:]] [[:lower:]])
+    if [ $? -eq 0 ]
+   then 
+     IS_COMPLETE=1
+   fi
 
    break
    fi
  done
+

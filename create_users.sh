@@ -1,27 +1,34 @@
 #!/bin/bash
 #Se separa el archivo por cada salto de linea
-FULLNAME=""
 USER_NAME=""
 NAME_TO_SAVE=""
 count=0
+TEMP_FILE='usradd_temp.txt'
+ORIGINAL_FILE='usersadd.txt'
+DELETE_USR_FILE='usersdelete.txt'
+IS_COMPLETE=0
+touch $TEMP_FILE
+cat $ORIGINAL_FILE > $TEMP_FILE
 while IFS= read -r FULLNAME
 do
+
    count=0
-   NAME_TO_SAVE=$FULLNAME
-   #Cada linea se divide por espacio
+   IS_COMPLETE=0
+     #Cada linea se divide por espacio
    . getUsername.sh
-   #adduser $USER_NAME 
-   echo  $NAME_TO_SAVE
-   if [ $? -gt 0 ]
-   	then
-            echo $NAME_TO_SAVE >> usersdelete.txt
-   	    sed -i '/$NAME_TO_SAVE/d' usersadd.txt
-	fi
+    adduser $USER_NAME 
    
+   if [[ $IS_COMPLETE -eq 1 && $? -eq 0 ]]
+   then 
+       echo $USER_NAME >> usersdelete.txt
+       sed -i "/$FULLNAME/d" $ORIGINAL_FILE
+       echo "Usuario $USER_NAME creado exitosamente"
+   else
+	echo "Error al crear usuario $USER_NAME"
+   
+   fi
+  
 
-done < usersadd.txt
-
-tail -5 /etc/shadow
-
-
+done < $TEMP_FILE
+rm $TEMP_FILE
 

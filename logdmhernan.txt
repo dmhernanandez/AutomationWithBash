@@ -1,0 +1,10 @@
+12/02/22 15:03:37 -  15:03:37 up  5:16,  2 users,  load average: 0,09, 0,14, 0,13 - Memory 1,0G - CPU 25.0% - Disk 5,9G de 17G - Network rx 118.23 MB tx 3.48 MB
+12/02/22 15:03:39 -  15:03:39 up  5:16,  2 users,  load average: 0,08, 0,14, 0,13 - Memory 1,0G - CPU 16.2% - Disk 5,9G de 17G - Network rx 118.23 MB tx 3.48 MB
+12/02/22 15:03:40 -  15:03:40 up  5:16,  2 users,  load average: 0,08, 0,14, 0,13 - Memory 1,0G - CPU 5.7% - Disk 5,9G de 17G - Network rx 118.23 MB tx 3.48 MB
+12/02/22 15:03:41 -  15:03:41 up  5:16,  2 users,  load average: 0,08, 0,14, 0,13 - Memory 1,0G - CPU 8.3% - Disk 5,9G de 17G - Network rx 118.23 MB tx 3.48 MB
+12/02/22 15:03:43 -  15:03:43 up  5:16,  2 users,  load average: 0,07, 0,14, 0,13 - Memory 1,0G - CPU 8.6% - Disk 5,9G de 17G - Network rx 118.23 MB tx 3.48 MB
+12/02/22 15:53:50 -  15:53:50 up  6:06,  2 users,  load average: 0,33, 0,18, 0,10 - Memory 1,1G - CPU 5.9% - Disk 5,9G de 17G - Network rx 118.33 MB tx 3.51 MB
+12/02/22 22:23:03 -  22:23:03 up 11:00,  2 users,  load average: 0,22, 0,23, 0,14 - Memory 1,0G - CPU 27.7% - Disk 5,9G de 17G - Network rx 119.02 MB tx 3.78 MB
+12/02/22 22:28:02 -  22:28:02 up 11:05,  2 users,  load average: 0,01, 0,13, 0,13 - Memory 1,0G - CPU 15.0% - Disk 5,9G de 17G - Network rx 119.03 MB tx 3.79 MB
+12/02/22 23:10:55 -  23:10:56 up 11:48,  2 users,  load average: 0,50, 0,27, 0,14 - Memory 784M - CPU 19.1% - Disk 5,9G de 17G - Network rx 119.11 MB tx 3.87 MB
+04/03/22 22:54:40 -  22:54:40 up 23:25,  2 users,  load average: 0,09, 0,15, 0,14 - Memory 874M - CPU 25.0% - Disk 6,4G de 17G - Network rx 427.18 MB tx 14.50 MB
